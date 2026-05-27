@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import Navbar from './components/Navbar.jsx'; // 1. Imported your unified Navbar
 import Landing from './pages/Landing.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
@@ -39,6 +40,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Navbar />
         <AppRoutes />
       </BrowserRouter>
     </AuthProvider>
