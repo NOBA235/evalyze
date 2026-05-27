@@ -43,55 +43,24 @@ const testimonials = [
 ];
 
 const stats = [
-  { value: '10×',   label: 'Faster grading' },
-  { value: '98%',   label: 'Accuracy rate'  },
+  { value: '10×',  label: 'Faster grading' },
+  { value: '98%',  label: 'Accuracy rate'  },
   { value: '100+',  label: 'Sheets evaluated' },
   { value: '4+', label: 'Teachers using'  },
 ];
 
 export default function Landing() {
   return (
-    <div className="bg-white overflow-x-hidden">
-
-      {/* ── Navbar ── */}
-      <header className="sticky top-0 z-50 bg-white border-b border-zinc-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md bg-zinc-900 flex items-center justify-center">
-              <Zap size={14} className="text-white" />
-            </div>
-            <span className="font-semibold text-base tracking-wide text-zinc-900">EVALYZE</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8">
-            {['Features', 'Workflow', 'Testimonials'].map(n => (
-              <a key={n} href={`#${n.toLowerCase()}`} className="text-zinc-600 hover:text-zinc-900 transition-colors text-sm font-medium">{n}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-3">
-            <Link to="/login"    className="text-zinc-600 hover:text-zinc-900 text-sm font-medium transition-colors hidden sm:block">Sign in</Link>
-            <Link to="/register" className="btn-primary py-2 px-5 text-xs">Get Started</Link>
-          </div>
-        </div>
-      </header>
+    <div className="bg-blue-700 overflow-x-hidden">
 
       {/* ── Hero ── */}
-      <section className="relative pt-20 pb-24 md:pt-28 md:pb-32 bg-gradient-to-br from-zinc-50 via-white to-blue-50/30">
+      <section className="relative pt-20 pb-24 md:pt-28 md:pb-32 bg-gradient-to-br from-blue-200 via-white to-blue-50/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.div variants={fadeUp}
-              className="inline-flex items-center gap-2 px-4 py-2  text-blue-700 text-sm font-medium tracking-wide mb-8">
-              <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}>
-                </motion.div>
-              Powered by Google Gemini Vision AI
-            </motion.div>
 
             <motion.h1 variants={fadeUp} className="heading-xl text-zinc-900 mb-6 max-w-4xl mx-auto">
-              AI That Evaluates{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent relative inline-block font-sm">
-                Answer Sheets
-                <motion.span className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-blue-600/0 via-blue-600/50 to-blue-600/0"
-                  initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.5, duration: 0.8 }} />
-              </span>{' '}For Teachers
+              AI Assistant
+              For Teachers
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-lg md:text-xl text-zinc-600 font-normal max-w-2xl mx-auto mb-10 leading-relaxed">
