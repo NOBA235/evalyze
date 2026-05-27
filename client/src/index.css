@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #ffffff;
+    color: #18181b;
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f4f4f5; }
+  ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+}
+
+@layer components {
+  /* Cards */
+  .card {
+    @apply rounded-2xl border border-zinc-200 bg-white p-5;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    @apply shadow-xl;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-zinc-900 hover:bg-zinc-800 text-white text-sm tracking-wider font-semibold transition-all rounded-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-8 py-3.5 border border-zinc-300 hover:bg-zinc-100 text-zinc-700 text-sm tracking-wider font-medium transition-all rounded-none;
+  }
+  .btn-blue {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white text-sm tracking-wider font-semibold transition-all rounded-none;
+  }
+
+  /* Form inputs */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg text-sm border border-zinc-200 bg-white text-zinc-900 font-normal;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .input-field::placeholder { color: #a1a1aa; }
+  .input-field:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+  }
+  .label {
+    @apply block text-xs font-semibold mb-1.5 tracking-[0.15em] uppercase text-zinc-500;
+  }
+
+  /* Section label (portfolio style) */
+  .section-label {
+    @apply uppercase tracking-[0.3em] text-sm text-zinc-500 font-semibold;
+  }
+  .section-label-blue {
+    @apply uppercase tracking-[0.3em] text-sm text-blue-600 font-semibold;
+  }
+
+  /* Heading styles */
+  .heading-xl {
+    @apply text-4xl sm:text-5xl md:text-6xl font-medium tracking-wide leading-tight;
+  }
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-medium tracking-wide;
+  }
+  .heading-md {
+    @apply text-xl md:text-2xl font-medium tracking-wide;
+  }
+
+  /* Status badges — light theme */
+  .status-submitted  { @apply text-blue-700 bg-blue-50 border border-blue-200; }
+  .status-evaluating { @apply text-amber-700 bg-amber-50 border border-amber-200; }
+  .status-ai_checked { @apply text-indigo-700 bg-indigo-50 border border-indigo-200; }
+  .status-teacher_approved { @apply text-emerald-700 bg-emerald-50 border border-emerald-200; }
+}
