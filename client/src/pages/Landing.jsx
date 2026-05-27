@@ -57,11 +57,19 @@ export default function Landing() {
       <section className="relative pt-20 pb-24 md:pt-28 md:pb-32 bg-gradient-to-br from-blue-200 via-white to-blue-50/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <motion.div initial="hidden" animate="visible" variants={stagger}>
-
-            <motion.h1 variants={fadeUp} className="heading-xl text-zinc-900 mb-6 max-w-4xl mx-auto">
-              AI Assistant
-              For Teachers
-            </motion.h1>
+<motion.h1 variants={fadeUp} className="heading-xl text-zinc-900 mb-6 max-w-4xl mx-auto">
+  AI Assistant{" "}
+  <span 
+    style={{ 
+      WebkitBackgroundClip: 'text', 
+      WebkitTextFillColor: 'transparent',
+      backgroundImage: 'linear-gradient(to right, #22d3ee, #8b5cf6)'
+    }}
+  >
+    For Teachers
+  </span>
+</motion.h1>
+            
 
             <motion.p variants={fadeUp} className="text-lg md:text-xl text-zinc-600 font-normal max-w-2xl mx-auto mb-10 leading-relaxed">
               Automate grading, feedback generation, and classroom performance analysis. Stop spending hours on answer sheets.

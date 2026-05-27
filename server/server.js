@@ -46,10 +46,10 @@ app.use((err, req, res, next) => {
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log('✅ MongoDB connected');
-    app.listen(PORT, () => console.log(`🚀 Evalyze server running on port ${PORT}`));
+    console.log(' MongoDB connected');
+    app.listen(PORT, () => console.log(` Evalyze server running on port ${PORT}`));
   })
   .catch(err => {
-    console.error('❌ MongoDB connection failed:', err.message);
+    console.error(' MongoDB connection failed:', err.message);
     process.exit(1);
   });
