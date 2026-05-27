@@ -1,6 +1,29 @@
+# dependencies
 node_modules/
+
+# env files
 .env
+client/.env
+server/.env
+
+# builds
 dist/
+build/
+
+# uploads
 uploads/
+
+# logs
 *.log
+
+# system
 .DS_Store
+Thumbs.db
+
+# deployment
+.vercel/
+.render/
+
+# editors
+.vscode/
+.idea/

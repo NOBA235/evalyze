@@ -64,7 +64,7 @@ const AnimatedWorkflow = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setStep((prev) => (prev + 1) % 3);
-    }, 2800); // Change step every 2.8 seconds
+    }, 1800); // Change step every 1.8 seconds
     return () => clearInterval(interval);
   }, []);
 
