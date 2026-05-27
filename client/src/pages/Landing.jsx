@@ -273,7 +273,6 @@ const AnimatedWorkflow = () => {
   );
 };
 
-// --- Existing Feature Data (unchanged) ---
 const features = [
   { icon: Brain,      title: 'Semantic AI Grading',    desc: 'Understands meaning and context — not keyword matching. Rewards conceptually correct answers even when worded differently.', accent: 'text-blue-600', bg: 'bg-blue-50' },
   { icon: Zap,        title: 'Instant Evaluation',     desc: 'Evaluate an entire classroom in under a minute. AI processes handwritten and typed answer sheets simultaneously.', accent: 'text-indigo-600', bg: 'bg-indigo-50' },
@@ -450,28 +449,58 @@ export default function Landing() {
       </section>
 
       {/* ── Features ── */}
-      <section id="features" className="bg-white py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <FadeUp className="text-center mb-12">
-            <p className="section-label mb-3">Capabilities</p>
-            <h2 className="heading-lg text-zinc-900 mb-4">Everything a teacher needs</h2>
-            <p className="text-zinc-600 max-w-lg mx-auto font-normal">Built specifically for academic evaluation — not a generic AI chatbot.</p>
-          </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map(({ icon: Icon, title, desc, accent, bg }, i) => (
-              <FadeUp key={title} delay={i * 0.07}>
-                <div className="card h-full group hover:-translate-y-1 transition-transform">
-                  <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center mb-4`}>
-                    <Icon size={18} className={accent} />
-                  </div>
-                  <h3 className="font-semibold text-zinc-900 mb-2 tracking-wide">{title}</h3>
-                  <p className="text-zinc-600 text-sm leading-relaxed font-normal">{desc}</p>
-                </div>
-              </FadeUp>
-            ))}
+<section id="features" className="bg-white py-16 md:py-24 overflow-hidden">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <FadeUp className="text-center mb-12">
+      <p className="section-label mb-3">Capabilities</p>
+      <h2 className="heading-lg text-zinc-900 mb-4">Everything a teacher needs</h2>
+      <p className="text-zinc-600 max-w-lg mx-auto font-normal">Built specifically for academic evaluation — not a generic AI chatbot.</p>
+    </FadeUp>
+
+    {/* Auto-scrolling carousel container */}
+    <div className="relative">
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-white z-10 pointer-events-none"></div>
+
+      {/* Scrolling track */}
+      <motion.div
+        className="flex gap-5"
+        animate={{
+          x: [0, -1920], 
+        }}
+        transition={{
+          x: {
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+            repeatType: "loop",
+          },
+        }}
+      >
+      
+        {[...features, ...features, ...features].map(({ icon: Icon, title, desc, accent, bg }, i) => (
+          <div
+            key={`${title}-${i}`}
+            className="card flex-shrink-0 w-[340px] sm:w-[360px] group hover:-translate-y-1 transition-transform cursor-default"
+          >
+            <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center mb-4`}>
+              <Icon size={18} className={accent} />
+            </div>
+            <h3 className="font-semibold text-zinc-900 mb-2 tracking-wide">{title}</h3>
+            <p className="text-zinc-600 text-sm leading-relaxed font-normal">{desc}</p>
           </div>
-        </div>
-      </section>
+        ))}
+      </motion.div>
+    </div>
+
+ 
+    <style>{`
+      .card:hover ~ div {
+        animation-play-state: paused;
+      }
+    `}</style>
+  </div>
+</section>
 
       {/* ── Workflow ── */}
       <section id="workflow" className="bg-zinc-50 py-16 md:py-24">
