@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Zap, Mail, Lock, Eye, EyeOff, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
+import Logo from '../components/Logo';
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -27,16 +28,13 @@ export default function Login() {
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md">
 
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-md bg-zinc-900 flex items-center justify-center">
-              <Zap size={16} className="text-white" />
-            </div>
-            <span className="font-semibold text-lg tracking-wide text-zinc-900">EVALYZE</span>
-          </Link>
-          <h1 className="text-3xl font-medium tracking-wide text-zinc-900 mb-2">Welcome back</h1>
-          <p className="text-zinc-500 font-normal text-sm">Sign in to your account</p>
-        </div>
+<div className="text-center mb-8">
+  <div className="flex justify-center mb-4 scale-75">
+    <Logo />
+  </div>
+  <h1 className="text-3xl font-medium tracking-wide text-zinc-900 mb-2">Welcome back</h1>
+  <p className="text-zinc-500 font-normal text-sm">Sign in to your account</p>
+</div>
 
         <div className="bg-white border border-zinc-200 rounded-2xl p-8 shadow-sm">
           {error && (
