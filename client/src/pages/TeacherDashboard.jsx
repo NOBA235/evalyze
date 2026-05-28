@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Users, BookOpen, X, Hash } from 'lucide-react';
-import Navbar from '../components/Navbar.jsx';
 import { classroomAPI } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -91,7 +90,6 @@ export default function TeacherDashboard() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">

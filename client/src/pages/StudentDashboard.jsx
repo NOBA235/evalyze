@@ -5,7 +5,6 @@ import {
   BookOpen, Upload, TrendingUp, Award, X, Hash,
   AlertCircle, ChevronRight, FileText, ArrowRight,
 } from 'lucide-react';
-import Navbar from '../components/Navbar.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
 import { classroomAPI, submissionAPI, analyticsAPI, examAPI } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -197,7 +196,6 @@ export default function StudentDashboard() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
 
         {/* ── Header ── */}

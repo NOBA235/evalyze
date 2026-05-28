@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCheck, Edit3, Save, X, Brain, AlertTriangle, Lightbulb, Target, BarChart3, Zap, RefreshCw } from 'lucide-react';
-import Navbar from '../components/Navbar.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
 import { submissionAPI, evaluationAPI } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
