@@ -164,7 +164,6 @@ export default function SubmissionView() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <Navbar backTo={exam ? `/exam/${exam._id || exam}` : (isTeacher ? '/teacher' : '/student')} backLabel="Exam" />
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
 
         {/* Header */}

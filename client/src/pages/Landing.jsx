@@ -93,7 +93,7 @@ const AnimatedWorkflow = () => {
       icon: FileCheck,
       title: "Evaluation Complete",
       detail: "Score: 82/100 · Feedback ready",
-      progress: null, // Final state: show stats instead
+      progress: null, 
       accentColor: "bg-emerald-500",
       bgGlow: "shadow-emerald-500/20",
       stats: [
@@ -338,7 +338,7 @@ export default function Landing() {
                     backgroundImage: 'linear-gradient(to right, #22d3ee, #8b5cf6)'
                   }}
                 >
-                  For Teachers
+                  For Educators
                 </span>
               </motion.h1>
 
@@ -447,8 +447,7 @@ export default function Landing() {
           </FadeUp>
         </div>
       </section>
-
-      {/* ── Features ── */}
+{/* ─── Features Section with Custom Illustrations ─── */}
 <section id="features" className="bg-white py-16 md:py-24 overflow-hidden">
   <div className="max-w-6xl mx-auto px-4 sm:px-6">
     <FadeUp className="text-center mb-12">
@@ -457,76 +456,232 @@ export default function Landing() {
       <p className="text-zinc-600 max-w-lg mx-auto font-normal">Built specifically for academic evaluation — not a generic AI chatbot.</p>
     </FadeUp>
 
-    {/* Auto-scrolling carousel container */}
-    <div className="relative">
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-white z-10 pointer-events-none"></div>
+    {/* Feature Illustrations SVG Component */}
+    <div className="hidden">
+      {/* Semantic AI Grading Illustration */}
+      <svg id="illustration-semantic" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Brain/Neural Network Pattern */}
+        <circle cx="100" cy="60" r="45" stroke="#DBEAFE" strokeWidth="2" fill="none" />
+        <circle cx="100" cy="60" r="30" stroke="#BFDBFE" strokeWidth="1.5" fill="none" strokeDasharray="4 4" />
+        {/* Neural nodes */}
+        <circle cx="70" cy="40" r="4" fill="#3B82F6" opacity="0.8" />
+        <circle cx="130" cy="40" r="4" fill="#3B82F6" opacity="0.8" />
+        <circle cx="100" cy="80" r="4" fill="#3B82F6" opacity="0.8" />
+        <circle cx="55" cy="65" r="3" fill="#60A5FA" opacity="0.6" />
+        <circle cx="145" cy="65" r="3" fill="#60A5FA" opacity="0.6" />
+        <circle cx="100" cy="30" r="3" fill="#93C5FD" opacity="0.5" />
+        {/* Connections */}
+        <line x1="70" y1="40" x2="100" y2="80" stroke="#BFDBFE" strokeWidth="1.5" />
+        <line x1="130" y1="40" x2="100" y2="80" stroke="#BFDBFE" strokeWidth="1.5" />
+        <line x1="70" y1="40" x2="130" y2="40" stroke="#BFDBFE" strokeWidth="1" />
+        <line x1="55" y1="65" x2="70" y2="40" stroke="#DBEAFE" strokeWidth="1" />
+        <line x1="145" y1="65" x2="130" y2="40" stroke="#DBEAFE" strokeWidth="1" />
+        {/* Central processing indicator */}
+        <circle cx="100" cy="60" r="8" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="2" />
+        <path d="M97 60h6M100 57v6" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
 
-      {/* Scrolling track */}
-      <motion.div
-        className="flex gap-5"
-        animate={{
-          x: [0, -1920], 
-        }}
-        transition={{
-          x: {
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-            repeatType: "loop",
-          },
-        }}
-      >
-      
-        {[...features, ...features, ...features].map(({ icon: Icon, title, desc, accent, bg }, i) => (
-          <div
-            key={`${title}-${i}`}
-            className="card flex-shrink-0 w-[340px] sm:w-[360px] group hover:-translate-y-1 transition-transform cursor-default"
-          >
-            <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center mb-4`}>
-              <Icon size={18} className={accent} />
-            </div>
-            <h3 className="font-semibold text-zinc-900 mb-2 tracking-wide">{title}</h3>
-            <p className="text-zinc-600 text-sm leading-relaxed font-normal">{desc}</p>
-          </div>
-        ))}
-      </motion.div>
+      {/* Instant Evaluation Illustration */}
+      <svg id="illustration-instant" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Lightning bolt with speed lines */}
+        <path d="M105 25L85 60H100L90 95L120 58H105L115 25H105Z" fill="#4F46E5" opacity="0.9" />
+        <path d="M105 25L85 60H100L90 95L120 58H105L115 25H105Z" fill="url(#instantGradient)" />
+        {/* Speed lines */}
+        <path d="M60 35L75 35" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+        <path d="M55 45L80 45" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+        <path d="M125 65L150 65" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+        <path d="M120 75L145 75" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+        {/* Clock indicator */}
+        <circle cx="70" cy="85" r="15" stroke="#C7D2FE" strokeWidth="1.5" fill="#EEF2FF" />
+        <path d="M70 78v7l4 4" stroke="#4F46E5" strokeWidth="1.5" strokeLinecap="round" />
+        <defs>
+          <linearGradient id="instantGradient" x1="85" y1="25" x2="120" y2="95">
+            <stop stopColor="#6366F1" />
+            <stop offset="1" stopColor="#818CF8" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* Detailed Feedback Illustration */}
+      <svg id="illustration-feedback" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Document with feedback marks */}
+        <rect x="40" y="20" width="120" height="85" rx="4" stroke="#C4B5FD" strokeWidth="1.5" fill="#F5F3FF" />
+        {/* Text lines */}
+        <rect x="55" y="35" width="90" height="4" rx="2" fill="#DDD6FE" />
+        <rect x="55" y="45" width="75" height="4" rx="2" fill="#DDD6FE" />
+        <rect x="55" y="55" width="85" height="4" rx="2" fill="#DDD6FE" />
+        <rect x="55" y="65" width="65" height="4" rx="2" fill="#DDD6FE" />
+        {/* Feedback annotations */}
+        <circle cx="140" cy="37" r="8" fill="#7C3AED" opacity="0.15" />
+        <path d="M136 37l8 0M140 33l0 8" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" />
+        <path d="M125 62l20 8" stroke="#8B5CF6" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 2" />
+        {/* Checkmark */}
+        <circle cx="145" cy="75" r="10" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="1.5" />
+        <path d="M140 75l3 3l5-6" stroke="#7C3AED" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+
+      {/* Analytics Illustration */}
+      <svg id="illustration-analytics" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Bar chart */}
+        <rect x="45" y="55" width="12" height="40" rx="2" fill="#D1FAE5" stroke="#6EE7B7" strokeWidth="1" />
+        <rect x="65" y="35" width="12" height="60" rx="2" fill="#A7F3D0" stroke="#34D399" strokeWidth="1" />
+        <rect x="85" y="45" width="12" height="50" rx="2" fill="#6EE7B7" stroke="#10B981" strokeWidth="1" />
+        <rect x="105" y="25" width="12" height="70" rx="2" fill="#34D399" stroke="#059669" strokeWidth="1" />
+        <rect x="125" y="40" width="12" height="55" rx="2" fill="#6EE7B7" stroke="#10B981" strokeWidth="1" />
+        {/* Trend line */}
+        <path d="M51 50L71 30L91 40L111 20L131 35" stroke="#059669" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <circle cx="51" cy="50" r="2" fill="#059669" />
+        <circle cx="71" cy="30" r="2" fill="#059669" />
+        <circle cx="91" cy="40" r="2" fill="#059669" />
+        <circle cx="111" cy="20" r="2" fill="#059669" />
+        <circle cx="131" cy="35" r="2" fill="#059669" />
+        {/* Bottom axis */}
+        <line x1="40" y1="95" x2="145" y2="95" stroke="#D1D5DB" strokeWidth="1" />
+      </svg>
+
+      {/* Teacher Control Illustration */}
+      <svg id="illustration-control" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Shield with checkmark */}
+        <path d="M100 25L60 40V65C60 82 77 95 100 100C123 95 140 82 140 65V40L100 25Z" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="2" />
+        <path d="M85 60l10 10l20-25" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Control sliders */}
+        <rect x="50" y="105" width="20" height="4" rx="2" fill="#FDE68A" />
+        <circle cx="60" cy="107" r="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+        <rect x="80" y="105" width="20" height="4" rx="2" fill="#FDE68A" />
+        <circle cx="95" cy="107" r="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+        <rect x="110" y="105" width="20" height="4" rx="2" fill="#FDE68A" />
+        <circle cx="125" cy="107" r="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+      </svg>
+
+      {/* Student Progress Illustration */}
+      <svg id="illustration-progress" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Growth curve */}
+        <path d="M30 90Q60 90 75 70Q95 40 115 45Q135 50 145 30Q155 10 170 25" stroke="#E11D48" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+        {/* Data points */}
+        <circle cx="30" cy="90" r="3" fill="#FDA4AF" />
+        <circle cx="75" cy="70" r="3" fill="#FB7185" />
+        <circle cx="115" cy="45" r="3" fill="#F43F5E" />
+        <circle cx="170" cy="25" r="3" fill="#E11D48" />
+        {/* Upward arrow */}
+        <path d="M170 40l0 15M162.5 32.5l7.5 7.5l7.5-7.5" stroke="#E11D48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Person icon */}
+        <circle cx="35" cy="30" r="8" fill="#FFE4E6" stroke="#FDA4AF" strokeWidth="1.5" />
+        <path d="M22 48Q35 38 48 48" stroke="#FDA4AF" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      </svg>
     </div>
 
- 
-    <style>{`
-      .card:hover ~ div {
-        animation-play-state: paused;
-      }
-    `}</style>
+    {/* Feature Cards Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {[
+        {
+          icon: Brain,
+          title: 'Semantic AI Grading',
+          desc: 'Understands meaning and context — not keyword matching. Rewards conceptually correct answers even when worded differently.',
+          accent: 'text-blue-600',
+          bg: 'bg-blue-50',
+          border: 'border-blue-100',
+          illustration: 'illustration-semantic',
+          gradientFrom: 'from-blue-50',
+          gradientTo: 'to-blue-100/50'
+        },
+        {
+          icon: Zap,
+          title: 'Instant Evaluation',
+          desc: 'Evaluate an entire classroom in under a minute. AI processes handwritten and typed answer sheets simultaneously.',
+          accent: 'text-indigo-600',
+          bg: 'bg-indigo-50',
+          border: 'border-indigo-100',
+          illustration: 'illustration-instant',
+          gradientFrom: 'from-indigo-50',
+          gradientTo: 'to-indigo-100/50'
+        },
+        {
+          icon: FileText,
+          title: 'Detailed Feedback',
+          desc: 'Per-question breakdowns with specific, human-like feedback. Students know exactly where they went wrong and why.',
+          accent: 'text-violet-600',
+          bg: 'bg-violet-50',
+          border: 'border-violet-100',
+          illustration: 'illustration-feedback',
+          gradientFrom: 'from-violet-50',
+          gradientTo: 'to-violet-100/50'
+        },
+        {
+          icon: BarChart3,
+          title: 'Classroom Analytics',
+          desc: 'Grade distributions, weak topic identification, pass/fail rates — all generated automatically after every evaluation.',
+          accent: 'text-emerald-600',
+          bg: 'bg-emerald-50',
+          border: 'border-emerald-100',
+          illustration: 'illustration-analytics',
+          gradientFrom: 'from-emerald-50',
+          gradientTo: 'to-emerald-100/50'
+        },
+        {
+          icon: Shield,
+          title: 'Teacher Override',
+          desc: 'AI suggests marks and feedback. You verify, edit, and approve. You stay in full control of every final grade.',
+          accent: 'text-amber-600',
+          bg: 'bg-amber-50',
+          border: 'border-amber-100',
+          illustration: 'illustration-control',
+          gradientFrom: 'from-amber-50',
+          gradientTo: 'to-amber-100/50'
+        },
+        {
+          icon: TrendingUp,
+          title: 'Student Progress',
+          desc: 'Every student sees their weak areas, improvement suggestions, and performance trends across exams over time.',
+          accent: 'text-rose-600',
+          bg: 'bg-rose-50',
+          border: 'border-rose-100',
+          illustration: 'illustration-progress',
+          gradientFrom: 'from-rose-50',
+          gradientTo: 'to-rose-100/50'
+        }
+      ].map(({ icon: Icon, title, desc, accent, bg, border, illustration, gradientFrom, gradientTo }, index) => (
+        <FadeUp key={title} delay={index * 0.1}>
+          <motion.div 
+            whileHover={{ y: -4, scale: 1.02 }}
+            className={`relative group bg-white border ${border} rounded-2xl p-6 
+              hover:shadow-xl transition-all duration-300 overflow-hidden`}
+          >
+            {/* Gradient background on hover */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${gradientFrom} ${gradientTo} 
+              opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+            
+            <div className="relative z-10">
+              {/* Icon */}
+              <div className={`w-12 h-12 rounded-xl ${bg} flex items-center justify-center mb-4 
+                group-hover:scale-110 transition-transform duration-300`}>
+                <Icon size={22} className={accent} />
+              </div>
+              
+              {/* Illustration */}
+              <div className="mb-4 h-32 flex items-center justify-center">
+                <svg className="w-full h-full" viewBox="0 0 200 120">
+                  <use href={`#${illustration}`} />
+                </svg>
+              </div>
+              
+              {/* Content */}
+              <h3 className="font-semibold text-zinc-900 mb-2 tracking-wide group-hover:text-zinc-800">
+                {title}
+              </h3>
+              <p className="text-zinc-600 text-sm leading-relaxed font-normal group-hover:text-zinc-700">
+                {desc}
+              </p>
+            </div>
+            
+            {/* Decorative corner gradient */}
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-white/50 to-transparent 
+              opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-bl-3xl" />
+          </motion.div>
+        </FadeUp>
+      ))}
+    </div>
   </div>
 </section>
-
-      {/* ── Workflow ── */}
-      <section id="workflow" className="bg-zinc-50 py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <FadeUp className="text-center mb-12">
-            <p className="section-label mb-3">Simple process</p>
-            <h2 className="heading-lg text-zinc-900 mb-4">How Evalyze works</h2>
-            <p className="text-zinc-600 max-w-lg mx-auto font-normal">Four steps from setup to published grades.</p>
-          </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {workflow.map(({ step, icon: Icon, title, desc }, i) => (
-              <FadeUp key={step} delay={i * 0.1}>
-                <motion.div whileHover={{ y: -6 }} className="card text-center group h-full">
-                  <motion.div whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-14 h-14 bg-zinc-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-zinc-200 transition-colors">
-                    <Icon size={22} className="text-zinc-700" />
-                  </motion.div>
-                  <div className="section-label-blue mb-2">Step {step}</div>
-                  <h3 className="font-semibold text-zinc-900 mb-2 tracking-wide">{title}</h3>
-                  <p className="text-zinc-600 text-sm leading-relaxed font-normal">{desc}</p>
-                </motion.div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── Testimonials ── */}
       <section id="testimonials" className="bg-white py-16 md:py-24">
