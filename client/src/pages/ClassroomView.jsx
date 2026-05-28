@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Copy, Check, Users, FileText, Clock, X, Upload, ChevronRight } from 'lucide-react';
-import Navbar from '../components/Navbar.jsx';
 import { classroomAPI, examAPI } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -156,7 +155,6 @@ export default function ClassroomView() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <Navbar backTo={isTeacher ? '/teacher' : '/student'} backLabel="Dashboard" />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {/* Header card */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
