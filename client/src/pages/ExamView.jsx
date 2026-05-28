@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, CheckCheck, BarChart3, RefreshCw, X, ChevronRight, FileText } from 'lucide-react';
-import Navbar from '../components/Navbar.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
 import { examAPI, submissionAPI, evaluationAPI, analyticsAPI } from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -142,7 +141,6 @@ export default function ExamView() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <Navbar backTo={exam?.classroom ? `/classroom/${exam.classroom._id || exam.classroom}` : (isTeacher ? '/teacher' : '/student')} backLabel="Classroom" />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
 
         {/* Exam header */}
