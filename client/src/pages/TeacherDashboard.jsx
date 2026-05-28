@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Users, BookOpen, X, Hash, ChevronRight, GraduationCap, LayoutGrid } from 'lucide-react';
 import { classroomAPI } from '../services/api.js';
@@ -7,9 +7,6 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 const COLORS = ['#2563eb','#7c3aed','#059669','#d97706','#dc2626','#0891b2'];
 
-/* ─────────────────────────────────────────────
-   CREATE MODAL — logic untouched, markup tightened
-───────────────────────────────────────────── */
 const CreateModal = ({ onClose, onCreate }) => {
   const [form, setForm] = useState({ name: '', subject: '', description: '', coverColor: COLORS[0] });
   const [loading, setLoading] = useState(false);
@@ -34,32 +31,37 @@ const CreateModal = ({ onClose, onCreate }) => {
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="label">Classroom Name</label>
-            <input className="input-field" placeholder="e.g. Grade 12 Physics" value={form.name}
+            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Classroom Name</label>
+            <input className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all" 
+              placeholder="e.g. Grade 12 Physics" value={form.name}
               onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required />
           </div>
           <div>
-            <label className="label">Subject</label>
-            <input className="input-field" placeholder="e.g. Physics" value={form.subject}
+            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Subject</label>
+            <input className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all" 
+              placeholder="e.g. Physics" value={form.subject}
               onChange={e => setForm(p => ({ ...p, subject: e.target.value }))} required />
           </div>
           <div>
-            <label className="label">Description (optional)</label>
-            <textarea className="input-field resize-none" rows={2} placeholder="Brief description…"
+            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Description (optional)</label>
+            <textarea className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none" 
+              rows={2} placeholder="Brief description…"
               value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} />
           </div>
           <div>
-            <label className="label">Colour</label>
+            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Colour</label>
             <div className="flex gap-2">
               {COLORS.map(c => (
                 <button key={c} type="button" onClick={() => setForm(p => ({ ...p, coverColor: c }))}
-                  className={`w-8 h-8 rounded-full border-2 transition-transform ${form.coverColor === c ? 'scale-110 border-zinc-900' : 'border-transparent hover:scale-105'}`}
+                  className={`w-8 h-8 rounded-full border-2 transition-transform hover:scale-110 ${
+                    form.coverColor === c ? 'border-zinc-900 scale-110' : 'border-transparent'
+                  }`}
                   style={{ backgroundColor: c }} />
               ))}
             </div>
           </div>
           <button type="submit" disabled={loading}
-            className="btn-primary w-full py-3.5 mt-2 disabled:opacity-50 flex items-center justify-center gap-2">
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-zinc-300 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2 mt-2">
             {loading
               ? <><div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />Creating…</>
               : 'Create Classroom'}
@@ -70,9 +72,6 @@ const CreateModal = ({ onClose, onCreate }) => {
   );
 };
 
-/* ─────────────────────────────────────────────
-   CLASSROOM CARD — redesigned, logic untouched
-───────────────────────────────────────────── */
 const ClassroomCard = ({ classroom, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -172,15 +171,54 @@ export default function TeacherDashboard() {
   const [classrooms, setClassrooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
-  const { user } = useAuth();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
 
+  // Redirect if not authenticated or not a teacher
   useEffect(() => {
-    classroomAPI.list()
-      .then(({ data }) => setClassrooms(data.classrooms))
-      .finally(() => setLoading(false));
-  }, []);
+    if (!authLoading) {
+      if (!isAuthenticated || !user) {
+        navigate('/login', { replace: true });
+      } else if (user.role !== 'teacher') {
+        navigate(`/${user.role}`, { replace: true });
+      }
+    }
+  }, [isAuthenticated, user, authLoading, navigate]);
 
-  const firstName = user?.name?.split(' ')[0];
+  // Fetch classrooms only if authenticated as teacher
+  useEffect(() => {
+    if (isAuthenticated && user?.role === 'teacher') {
+      classroomAPI.list()
+        .then(({ data }) => setClassrooms(data.classrooms))
+        .catch((error) => {
+          console.error('Failed to fetch classrooms:', error);
+          // If 401 or 403, redirect to login
+          if (error.response?.status === 401 || error.response?.status === 403) {
+            navigate('/login', { replace: true });
+          }
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [isAuthenticated, user, navigate]);
+
+  // Show loading state while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-zinc-500 text-sm">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated or not a teacher
+  if (!isAuthenticated || !user || user.role !== 'teacher') {
+    return null; // Will redirect via useEffect
+  }
+
+  const firstName = user?.name?.split(' ')[0] || 'Teacher';
   const totalStudents = classrooms.reduce((a, c) => a + (c.students?.length || 0), 0);
 
   return (
@@ -195,18 +233,20 @@ export default function TeacherDashboard() {
           className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-8"
         >
           <div>
-            <p className="section-label mb-1.5">Teacher Dashboard</p>
-            <h1 className="heading-lg text-zinc-900 leading-tight">
+            <p className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1.5">Teacher Dashboard</p>
+            <h1 className="text-3xl font-bold text-zinc-900 leading-tight">
               Welcome back, {firstName}
             </h1>
-            <p className="text-zinc-400 text-sm mt-1 font-normal">
+            <p className="text-zinc-500 text-sm mt-1 font-normal">
               Manage your classrooms and track student activity
             </p>
           </div>
 
           <button
             onClick={() => setShowCreate(true)}
-            className="btn-primary flex items-center gap-2 self-start sm:self-auto py-3 px-5 shrink-0"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl 
+              transition-all flex items-center gap-2 self-start sm:self-auto py-3 px-5 
+              shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
           >
             <Plus size={15} />New Classroom
           </button>
@@ -232,7 +272,7 @@ export default function TeacherDashboard() {
 
         {/* ── SECTION LABEL ── */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-zinc-900 tracking-wide text-sm">Classrooms</h2>
+          <h2 className="font-semibold text-zinc-900 tracking-wide text-sm">Your Classrooms</h2>
           {!loading && classrooms.length > 0 && (
             <span className="text-zinc-400 text-xs">{classrooms.length} total</span>
           )}
@@ -256,7 +296,11 @@ export default function TeacherDashboard() {
             <p className="text-zinc-400 text-sm font-normal mb-6 max-w-xs">
               Create your first classroom to start assigning exams and tracking students
             </p>
-            <button onClick={() => setShowCreate(true)} className="btn-primary px-7 py-2.5 flex items-center gap-2">
+            <button 
+              onClick={() => setShowCreate(true)} 
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl 
+                transition-all flex items-center gap-2 px-7 py-2.5 shadow-lg shadow-blue-500/25"
+            >
               <Plus size={14} />Create Classroom
             </button>
           </motion.div>
