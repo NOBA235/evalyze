@@ -344,6 +344,7 @@ export default function Landing() {
 
               <motion.p variants={fadeUp} className="text-lg md:text-xl text-zinc-600 font-normal max-w-xl mb-10 leading-relaxed">
                 Automate grading, feedback generation, and classroom performance analysis. Stop spending hours on answer sheets.
+                Evalyze evaluates thousands of answer sheets in minute.
               </motion.p>
 
               {/* CTA Buttons */}
